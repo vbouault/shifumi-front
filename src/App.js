@@ -18,12 +18,14 @@ function App() {
   }
 
   let userNameFromToken = null
+  let userIdFromToken = null
   if (token) {
-    userNameFromToken = jwtDecode(token).name || null
+    userNameFromToken = jwtDecode(token).name || null;
+    userIdFromToken = jwtDecode(token).id || null;
   }
 
   return (
-    <AuthContext.Provider value={{ token, setToken: setTokenInLocalStorage }}>
+    <AuthContext.Provider value={{ token, setToken: setTokenInLocalStorage, userIdFromToken, userNameFromToken }}>
       <Router>
         <div className="App">
           <AppBar position="static">

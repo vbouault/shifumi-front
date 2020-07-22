@@ -14,3 +14,21 @@
   display: flex;
   flex-direction: column;
 }
+
+.game-card {
+  margin:20px 0;
+  background-color:#76AFCF ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.game-card:hover {
+  box-shadow: 2px 0px 37px -10px rgba(0,0,0,0.75);
+}
+
+.button-game-card {
+  height: 30px;
+}
