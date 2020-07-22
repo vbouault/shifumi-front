@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import AuthContext from '../authContext';
-import API from '../API';
 import GameCard from './GameCard';
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
+import socketIOClient from 'socket.io-client';
 
 const Home = () => {
 
@@ -11,26 +11,31 @@ const Home = () => {
   const [games, setGames] = useState()
   const [redirect, setRedirect] = useState(false)
   const [newGameId, setNewGameId] = useState()
+  const [socket, setSocket] = useState(null)
 
 
   useEffect(() => {
-    API.get('/games/notStarted')
-      .then(res => res.data)
-      .then(data => {
-        setGames(data)
-      })
+    const socket = socketIOClient('http://localhost:3000')
+    setSocket(socket)
+    socket.on('GameList', (games) => {
+      setGames(games)
+    });
+    socket.on('reloadGames', (newGame) => {
+      setGames((games) => [...games, newGame])
+    });
+    socket.on('reloadGamesUpdate', (game) => {
+      setGames((games) => games.filter(g => g.id !== game.id))
+    });
   }, [])
 
   const handleCreateGame = () => {
-    API.post(`/games/users/${userIdFromToken}`)
-      .then(res => res.data)
-      .then(data => {
-        setGames([...games, data])
-        setNewGameId(data.id)
-      })
-      .then(() => {
-        setRedirect(true)
-      })
+    socket.emit('newGame', {
+      id_user1 : userIdFromToken
+    })
+    socket.on('reloadGames', (newGame) => {
+      setNewGameId(newGame.id)
+      setRedirect(true)
+    });
   }
 
   if(redirect){

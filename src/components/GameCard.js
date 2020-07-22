@@ -1,19 +1,26 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import API from '../API';
 import { Redirect } from "react-router-dom";
 import AuthContext from '../authContext';
+import socketIOClient from 'socket.io-client';
 
 const GameCard = ({ game }) => {
 
   const { userIdFromToken } = useContext(AuthContext);
   const [redirect, setRedirect] = useState(false)
+  const [socket, setSocket] = useState(null)
+
+  useEffect(() => {
+    const socket = socketIOClient('http://localhost:3000')
+    setSocket(socket)
+  }, [])
 
   const handleJoinExistGame = () => {
-    API.patch(`/games/${game.id}`, { idUser2 : userIdFromToken })
-      .then(() => {
-        setRedirect(true)
-      })
+    socket.emit('updateGame', {
+      id : game.id,
+      id_user2 : userIdFromToken
+    })
+    setRedirect(true)
   }
 
   if(redirect){
