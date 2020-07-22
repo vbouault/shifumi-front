@@ -7,6 +7,7 @@ import AuthContext from './authContext';
 import jwtDecode from 'jwt-decode';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
+import AppBar from '@material-ui/core/AppBar';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('authToken'))
@@ -22,18 +23,23 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider value={{token, setToken: setTokenInLocalStorage}}>
+    <AuthContext.Provider value={{ token, setToken: setTokenInLocalStorage }}>
       <Router>
         <div className="App">
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <PrivateRoute exact path="/">
-              <Home />
-            </PrivateRoute>
-            <PrivateRoute path="/game/:id" component={(props) => <Game {...props}/>} />
-          </Switch>
+          <AppBar position="static">
+            <h2>Shifumi</h2>
+          </AppBar>
+          <div className="main">
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <PrivateRoute exact path="/">
+                <Home />
+              </PrivateRoute>
+              <PrivateRoute path="/game/:id" component={(props) => <Game {...props} />} />
+            </Switch>
+          </div>
         </div>
       </Router>
     </AuthContext.Provider>
