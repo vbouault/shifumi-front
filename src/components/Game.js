@@ -15,8 +15,8 @@ const Game = (props) => {
   const [dataGame, setDataGame] = useState();
   const [selectedObjectUser1, setSelectedObjectUser1] = useState();
   const [selectedObjectUser2, setSelectedObjectUser2] = useState();
-  const [pointUser1, setPointUser1] = useState(0);
-  const [pointUser2, setPointUser2] = useState(0);
+  const [pointUser1, setPointUser1] = useState();
+  const [pointUser2, setPointUser2] = useState();
   const [currentUser, setCurrentUser] = useState();
   const [winMessage, setWinMessage] = useState('');
 
@@ -30,8 +30,14 @@ const Game = (props) => {
     socket.on('reloadObject', (data) => {
       if (data.selectedObjectUser1 || data.selectedObjectUser1 === '') {
         setSelectedObjectUser1(data.selectedObjectUser1)
+        if(data.pointUser1) {
+          setPointUser1(data.pointUser1)
+        }
       } else if (data.selectedObjectUser2 || data.selectedObjectUser2 === '') {
         setSelectedObjectUser2(data.selectedObjectUser2)
+        if(data.pointUser2) {
+          setPointUser2(data.pointUser2)
+        }
       }
     });
   }, [])
@@ -39,50 +45,57 @@ const Game = (props) => {
   useEffect(() => {
     if (dataGame) {
       setCurrentUser(userNameFromToken === dataGame.name2 ? 'user2' : 'user1')
+      setPointUser1(dataGame.point_user1)
+      setPointUser2(dataGame.point_user2)
     }
   }, [dataGame])
 
 
   const winVerify = async () => {
+    let winMessageCopy = '';
     if (currentUser === 'user1' && selectedObjectUser1 && selectedObjectUser2) {
       if (selectedObjectUser1 === selectedObjectUser2) {
-        setWinMessage('égalité')
+        winMessageCopy = 'égalité';
       } else if (selectedObjectUser1 === 'feuille' && selectedObjectUser2 === 'ciseaux') {
-        setWinMessage('Perdu')
+        winMessageCopy = 'Perdu';
       } else if (selectedObjectUser1 === 'ciseaux' && selectedObjectUser2 === 'feuille') {
-        setWinMessage('Gagné')
+        winMessageCopy = 'Gagné';
       } else if (selectedObjectUser1 === 'ciseaux' && selectedObjectUser2 === 'pierre') {
-        setWinMessage('Perdu')
+        winMessageCopy = 'Perdu';
       } else if (selectedObjectUser1 === 'pierre' && selectedObjectUser2 === 'ciseaux') {
-        setWinMessage('Gagné')
+        winMessageCopy = 'Gagné';
       } else if (selectedObjectUser1 === 'pierre' && selectedObjectUser2 === 'feuille') {
-        setWinMessage('Perdu')
+        winMessageCopy = 'Perdu';
       } else if (selectedObjectUser1 === 'feuille' && selectedObjectUser2 === 'pierre') {
-        setWinMessage('Gagné')
+        winMessageCopy = 'Gagné';
       }
+      setWinMessage(winMessageCopy)
       await delay(5000)
-      socket.emit('object', { selectedObjectUser1: '', id, currentUser, pointUser1: winMessage === 'Gagné' ? pointUser1 + 1 : pointUser1 })
+      socket.emit('object', { selectedObjectUser1: '', id, currentUser, pointUser1: winMessageCopy === 'Gagné' ? pointUser1 + 1 : pointUser1 })
       setWinMessage('')
       setSelectedObjectUser1('')
+      setSelectedObjectUser2('')
     } else if (currentUser === 'user2' && selectedObjectUser1 && selectedObjectUser2) {
       if (selectedObjectUser1 === selectedObjectUser2) {
-        setWinMessage('égalité')
+        winMessageCopy = 'égalité';
       } else if (selectedObjectUser2 === 'feuille' && selectedObjectUser1 === 'ciseaux') {
-        setWinMessage('Perdu')
+        winMessageCopy = 'Perdu';
       } else if (selectedObjectUser2 === 'ciseaux' && selectedObjectUser1 === 'feuille') {
-        setWinMessage('Gagné')
+        winMessageCopy = 'Gagné';
       } else if (selectedObjectUser2 === 'ciseaux' && selectedObjectUser1 === 'pierre') {
-        setWinMessage('Perdu')
+        winMessageCopy = 'Perdu';
       } else if (selectedObjectUser2 === 'pierre' && selectedObjectUser1 === 'ciseaux') {
-        setWinMessage('Gagné')
+        winMessageCopy = 'Gagné';
       } else if (selectedObjectUser2 === 'pierre' && selectedObjectUser1 === 'feuille') {
-        setWinMessage('Perdu')
+        winMessageCopy = 'Perdu';
       } else if (selectedObjectUser2 === 'feuille' && selectedObjectUser1 === 'pierre') {
-        setWinMessage('Gagné')
+        winMessageCopy = 'Gagné';
       }
+      setWinMessage(winMessageCopy)
       await delay(5000)
-      socket.emit('object', { selectedObjectUser2: '', id, currentUser, pointUser2: winMessage === 'Gagné' ? pointUser2 + 1 : pointUser2 })
+      socket.emit('object', { selectedObjectUser2: '', id, currentUser, pointUser2: winMessageCopy === 'Gagné' ? pointUser2 + 1 : pointUser2 })
       setWinMessage('')
+      setSelectedObjectUser1('')
       setSelectedObjectUser2('')
     }
   }
