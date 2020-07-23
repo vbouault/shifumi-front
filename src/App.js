@@ -29,7 +29,7 @@ function App() {
       <Router>
         <div className="App">
           <AppBar position="static">
-            <h2>Shifumi</h2>
+            <h2 className='title-navbar'>Shifumi</h2>
           </AppBar>
           <div className="main">
             <Switch>

@@ -9,7 +9,12 @@
 .main {
   max-width: 400px;
   margin: 0 auto;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 90px);
+}
+
+.title-navbar{
+  font-size: 40px;
+  margin:10px;
 }
 
 .form-login {
@@ -58,9 +63,60 @@
   align-items: center;
 }
 
-.game-page-container{
+.game-page-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
+
+.game-finish-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.image-game-small {
+  width: 30px;
+}
+
+.game-point {
+  background-color: #76AFCF;
+  height: 75px;
+  width: 75px;
+  border-radius: 40px;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+}
+
+.game-point p {
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.game_pseudo {
+  background-color: #76AFCF;
+  border: 2px solid black;
+  margin: 20px;
+}
+
+.MuiButton-containedPrimary, .MuiAppBar-colorPrimary {
+  background-color: #76AFCF !important;
+  color : black !important;
+}
+
+.MuiFormLabel-root.Mui-focused {
+  color : #76AFCF !important;
+  
+}
+.Mui-focused fieldset{
+  border-color: #76AFCF !important;
+}
+
+
+

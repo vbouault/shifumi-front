@@ -46,7 +46,7 @@ const Home = () => {
     return (
       <>
         <div>
-          {games && games.map(game => <GameCard game={game} key={game.id}/>)}
+          {games && games.length !== 0 ? games.map(game => <GameCard game={game} key={game.id}/>) : <h3>Pas de partie en cours</h3>}
         </div>
         <Button
           type="submit"
