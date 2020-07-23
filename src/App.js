@@ -5,9 +5,10 @@ import Home from './components/Home';
 import Game from './components/Game';
 import AuthContext from './authContext';
 import jwtDecode from 'jwt-decode';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('authToken'))
@@ -23,13 +24,14 @@ function App() {
     userNameFromToken = jwtDecode(token).name || null;
     userIdFromToken = jwtDecode(token).id || null;
   }
-
+  console.log(window.location)
   return (
     <AuthContext.Provider value={{ token, setToken: setTokenInLocalStorage, userIdFromToken, userNameFromToken }}>
       <Router>
         <div className="App">
-          <AppBar position="static">
-            <h2 className='title-navbar'>Shifumi</h2>
+          <AppBar position="static" className='navbar-container' >
+              {/* <Button variant="contained" color="primary" onClick={() => setTokenInLocalStorage('')}> Deconnexion</Button> */}
+              <h2 className='title-navbar'>Shifumi</h2>
           </AppBar>
           <div className="main">
             <Switch>

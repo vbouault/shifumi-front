@@ -142,7 +142,7 @@ const Game = (props) => {
     return (
       <div className='game-finish-container'>
         {currentUser === 'user1' ? <h2>{endGameMessageUser1}</h2> : <h2>{endGameMessageUser2}</h2>}
-        <Button type="submit" fullWidth variant="contained" color="primary"><Link to='/'>Retour à l'accueil</Link></Button>
+        <Button type="submit" fullWidth variant="contained" color="primary"><Link className='button-back-home' to='/'>Retour à l'accueil</Link></Button>
       </div>
     )
   } else {
