@@ -219,7 +219,7 @@ if (!!token) {
               color="primary"
               className={classes.submit}
             >
-              Connexion
+              Inscription
               </Button>}
         </form>
       </div>
