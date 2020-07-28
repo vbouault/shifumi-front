@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const baseURL = process.env.REACT_APP_API_BASE_URL
-const baseURL = 'http://localhost:3000'
+const baseURL = process.env.REACT_APP_API_BASE_URL
+// const baseURL = 'http://localhost:3000'
 const API = axios.create({
   baseURL
 })
