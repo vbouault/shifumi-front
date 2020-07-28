@@ -15,7 +15,7 @@ const Home = () => {
 
 
   useEffect(() => {
-    const socket = socketIOClient('http://localhost:3000')
+    const socket = socketIOClient(process.env.REACT_APP_API_BASE_URL)
     setSocket(socket)
     socket.on('GameList', (games) => {
       setGames(games)

@@ -11,7 +11,7 @@ const GameCard = ({ game }) => {
   const [socket, setSocket] = useState(null)
 
   useEffect(() => {
-    const socket = socketIOClient('http://localhost:3000')
+    const socket = socketIOClient(process.env.REACT_APP_API_BASE_URL)
     setSocket(socket)
   }, [])
 

@@ -25,7 +25,7 @@ const Game = (props) => {
   const [endGameMessageUser2, setEndGameMessageUser2] = useState('');
 
   useEffect(() => {
-    const socket = socketIOClient('http://localhost:3000')
+    const socket = socketIOClient(process.env.REACT_APP_API_BASE_URL)
     setSocket(socket)
     socket.emit('dataGame', id)
     socket.on('reloadDataGame', (game) => {
