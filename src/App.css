@@ -4,6 +4,8 @@
   font-family: 'Nunito', sans-serif;
   text-align: center;
   height: 100vh;
+  background-color: #090707 ;
+  color : white;
 }
 
 .main {
@@ -24,7 +26,7 @@
 
 .game-card {
   margin:20px 0;
-  background-color:#76AFCF ;
+  background-color:#E53A40 ;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,7 +84,7 @@
 }
 
 .game-point {
-  background-color: #76AFCF;
+  background-color: #E53A40;
   height: 75px;
   width: 75px;
   border-radius: 40px;
@@ -100,22 +102,48 @@
 }
 
 .game_pseudo {
-  background-color: #76AFCF;
+  background-color: #E53A40;
+  border-radius: 25px;
   border: 2px solid black;
   margin: 20px;
 }
 
 .MuiButton-containedPrimary, .MuiAppBar-colorPrimary {
-  background-color: #76AFCF !important;
+  background-color: #EFDC05 !important;
   color : black !important;
 }
 
 .MuiFormLabel-root.Mui-focused {
-  color : #76AFCF !important;
+  color : #E53A40 !important;
   
 }
 .Mui-focused fieldset{
-  border-color: #76AFCF !important;
+  border-color: #E53A40 !important;
+}
+
+.MuiInputBase-input {
+  color: white !important;
+}
+
+.MuiOutlinedInput-root fieldset {
+  border-color: white;
+  color : white !important;
+}
+
+.MuiFormLabel-root.Mui-focused {
+  color : #E53A40 !important;
+}
+.MuiInput-underline {
+  color: #E53A40 !important;
+}
+.MuiInput-underline:after {
+  border-bottom-color: #2EC4B6 !important ;
+}
+.MuiInput-underline:before {
+  border-bottom-color: #EFFFE9 !important ;
+}
+.MuiFormLabel-root {
+  color: #EFFFE9 !important;
 }
 
 .button-back-home {
@@ -123,5 +151,14 @@
   text-decoration: none;
 }
 
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-container-login {
+  display: flex;
+  justify-content: center;
+}
 
 
