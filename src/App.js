@@ -8,7 +8,10 @@ import jwtDecode from 'jwt-decode';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('authToken'))
@@ -29,19 +32,22 @@ function App() {
     <AuthContext.Provider value={{ token, setToken: setTokenInLocalStorage, userIdFromToken, userNameFromToken }}>
       <Router>
         <div className="App">
-          <AppBar position="static" className='navbar-container' >
-              {/* <Button variant="contained" color="primary" onClick={() => setTokenInLocalStorage('')}> Deconnexion</Button> */}
+          <AppBar position="static" >
+            <Toolbar className={token ? 'navbar-container' : 'navbar-container-login'}>
+              {token && <p>{userNameFromToken}</p>}
               <h2 className='title-navbar'>Shifumi</h2>
+              {token && <Button variant="contained" className='logout-buton' color="primary" onClick={() => setTokenInLocalStorage('')}><PowerSettingsNewIcon /></Button>}
+            </Toolbar>
           </AppBar>
           <div className="main">
             <Switch>
-              <Route path="/login">
+              <Route exact path="/login">
                 <Login />
               </Route>
               <PrivateRoute exact path="/">
                 <Home />
               </PrivateRoute>
-              <PrivateRoute path="/game/:id" component={(props) => <Game {...props} />} />
+              <PrivateRoute exact path="/game/:id" component={(props) => <Game {...props} />} />
             </Switch>
           </div>
         </div>
