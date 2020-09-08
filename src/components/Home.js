@@ -50,9 +50,9 @@ const Home = () => {
         </div>
         <Button
           type="submit"
-          fullWidth
+          // fullWidth
           variant="contained"
-          color="primary"
+          className="button-new-game"
           onClick={handleCreateGame}
         >
           Nouvelle partie
