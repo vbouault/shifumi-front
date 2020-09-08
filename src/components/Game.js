@@ -105,10 +105,10 @@ const Game = (props) => {
   }
 
   const endGameVerify = () => {
-    if (pointUser1 >= 5) {
+    if (pointUser1 >= 3) {
       setEndGameMessageUser1('Bravo, vous avez gagné !')
       setEndGameMessageUser2('Dommage, vous avez perdu !')
-    } else if (pointUser2 >= 5) {
+    } else if (pointUser2 >= 3) {
       setEndGameMessageUser2('Bravo, vous avez gagné !')
       setEndGameMessageUser1('Dommage, vous avez perdu !')
     }
